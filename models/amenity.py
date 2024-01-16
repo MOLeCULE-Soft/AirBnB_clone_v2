@@ -1,7 +1,10 @@
 #!/usr/bin/python3
-""" State Module for HBNB project """
+"""Amenity module"""
+
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
+    """Amenity class implementation"""
+
     name = ""
