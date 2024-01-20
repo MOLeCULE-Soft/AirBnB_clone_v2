@@ -26,15 +26,8 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
-        dic = {}
         if cls:
-            dictionary = self.__objects
-            for key in dictionary:
-                partition = key.replace('.', ' ')
-                partition = shlex.split(partition)
-                if (partition[0] == cls.__name__):
-                    dic[key] = self.__objects[key]
-            return (dic)
+            return {key: val for key, val in self.__objects if key.split('.')[0] == cls.__name__}
         else:
             return self.__objects
 
