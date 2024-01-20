@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 """Place class"""
-
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
-import models
+from models import storage
 
 place_amenity = Table("place_amenity", Base.metadata,
                       Column("place_id", String(60),
@@ -44,18 +43,9 @@ class Place(BaseModel, Base):
         @property
         def reviews(self):
             """Returns list of reviews.id"""
-            var = models.storage.all()
-            lista = []
-            result = []
-            for key in var:
-                review = key.replace('.', ' ')
-                review = shlex.split(review)
-                if (review[0] == 'Review'):
-                    lista.append(var[key])
-            for elem in lista:
-                if (elem.place_id == self.id):
-                    result.append(elem)
-            return (result)
+            return [val for key, val in storage.all()
+                    if key.split('.')[0] == 'Review'
+                    and val.place_id == self.id]
 
         @property
         def amenities(self):
