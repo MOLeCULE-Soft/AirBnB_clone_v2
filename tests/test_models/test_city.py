@@ -1,23 +1,24 @@
 #!/usr/bin/python3
-"""Contains tests for city.py"""
-import unittest
-from models.base_model import BaseModel
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.city import City
 
 
-class TestCity(unittest.TestCase):
-    """Class for tests on City class"""
+class test_City(test_basemodel):
+    """ """
 
-    def setUp(self):
-        self.city = City()
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "City"
+        self.value = City
 
-    def test_attributes(self):
-        self.assertEqual(self.city.state_id, "")
-        self.assertEqual(self.city.name, "")
+    def test_state_id(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.state_id), str)
 
-    def test_instance(self):
-        self.assertIsInstance(self.city, City)
-        self.assertIsInstance(self.city, BaseModel)
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_name(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.name), str)

@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Initialization of AirBnB console"""
-
+"""This module instantiates an object of class FileStorage"""
 from models.engine.file_storage import FileStorage
 
 

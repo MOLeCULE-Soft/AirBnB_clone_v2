@@ -1,16 +1,19 @@
 #!/usr/bin/python3
-"""Contains tests for state.py"""
-
-import unittest
+""" """
+from tests.test_models.test_base_model import test_basemodel
 from models.state import State
 
-class TestState(unittest.TestCase):
-    """State class implementation"""
 
-    def test_state_name(self):
-        state = State()
-        state.name = ""
-        self.assertEqual(state.name, "")
+class test_state(test_basemodel):
+    """ """
 
-if __name__ == '__main__':
-    unittest.main()
+    def __init__(self, *args, **kwargs):
+        """ """
+        super().__init__(*args, **kwargs)
+        self.name = "State"
+        self.value = State
+
+    def test_name3(self):
+        """ """
+        new = self.value()
+        self.assertEqual(type(new.name), str)
