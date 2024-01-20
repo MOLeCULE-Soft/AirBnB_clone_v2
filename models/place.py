@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Table, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
-from models import storage
+import models
 
 place_amenity = Table("place_amenity", Base.metadata,
                       Column("place_id", String(60),
@@ -43,7 +43,7 @@ class Place(BaseModel, Base):
         @property
         def reviews(self):
             """Returns list of reviews.id"""
-            return [val for key, val in storage.all()
+            return [val for key, val in models.storage.all()
                     if key.split('.')[0] == 'Review'
                     and val.place_id == self.id]
 

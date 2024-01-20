@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String
-from models import storage
+import models
 
 
 class State(BaseModel, Base):
@@ -15,6 +15,6 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        return [val for key, val in storage.all()
+        return [val for key, val in models.storage.all()
                 if key.split('.')[0] == 'City'
                 and val.state_id == self.id]
