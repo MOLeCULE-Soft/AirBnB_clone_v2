@@ -47,7 +47,7 @@ class DBStorage:
                 dic[key] = elem
         else:
             lst = [State, City, User, Place, Review, Amenity]
-            dic = {f"{type(el).__name__}.{el.id}": el
+            dic = {f"{cls}.{el.id}": el
                    for cls in lst for el in self.__session.query(cls)}
 
         return (dic)
