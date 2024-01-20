@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_create(self, args):
-        """Create a new instance of a class"""
+        """Create a new instance of a class."""
         try:
             if not args:
                 raise SyntaxError()
