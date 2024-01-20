@@ -11,6 +11,7 @@ from models.user import User
 from models.place import Place
 from models.review import Review
 from models.amenity import Amenity
+from models import util as Util
 
 
 class DBStorage:
@@ -37,20 +38,9 @@ class DBStorage:
         Return:
             returns a dictionary of __object
         """
-        dic = {}
-        if cls:
-            if type(cls) is str:
-                cls = eval(cls)
-            query = self.__session.query(cls)
-            for elem in query:
-                key = "{}.{}".format(type(elem).__name__, elem.id)
-                dic[key] = elem
-        else:
-            lst = [State, City, User, Place, Review, Amenity]
-            dic = {f"{cls}.{el.id}": el
-                   for cls in lst for el in self.__session.query(cls)}
-
-        return (dic)
+        lst = [cls] if cls else [State, City, User, Place, Review, Amenity]
+        return {f"{cls}.{el.id}": el for cls in lst
+                for el in self.__session.query(cls)}
 
     def new(self, obj):
         """add a new element in the table
