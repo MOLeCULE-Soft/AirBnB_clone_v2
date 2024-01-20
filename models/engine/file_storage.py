@@ -71,8 +71,7 @@ class FileStorage:
         """ delete an existing element
         """
         if obj:
-            key = "{}.{}".format(type(obj).__name__, obj.id)
-            del self.__objects[key]
+            del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
 
     def close(self):
         """ calls reload()
