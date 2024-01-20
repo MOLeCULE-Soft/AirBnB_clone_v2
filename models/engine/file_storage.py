@@ -27,7 +27,7 @@ class FileStorage:
             returns a dictionary of __object
         """
         if cls:
-            return {key: val for key, val in self.__objects
+            return {key: val for key, val in self.__objects.items()
                     if key.split('.')[0] == cls.__name__}
         else:
             return self.__objects
