@@ -46,10 +46,10 @@ class DBStorage:
                 key = "{}.{}".format(type(elem).__name__, elem.id)
                 dic[key] = elem
         else:
-            lista = [State, City, User, Place, Review, Amenity]
-            for clase in lista:
-                dic = {f"{type(elem).__name__}.{elem.id}":
-                       elem for elem in self.__session.query(clase)}
+            lst = [State, City, User, Place, Review, Amenity]
+            dic = {f"{type(el).__name__}.{el.id}": el
+                   for cls in lst for el in self.__session.query(cls)}
+
         return (dic)
 
     def new(self, obj):
