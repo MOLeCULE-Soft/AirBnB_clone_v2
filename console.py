@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from models import util as Util
 
 
 class HBNBCommand(cmd.Cmd):
@@ -18,11 +19,6 @@ class HBNBCommand(cmd.Cmd):
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
              'number_rooms': int, 'number_bathrooms': int,
@@ -128,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
-        new_obj = HBNBCommand.classes[arg.split(" ")[0]](**attribs)
+        new_obj = eval(Util.classes[arg.split(" ")[0]])(**attribs)
         new_obj.save()
         print(new_obj.id)
 
@@ -150,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if c_name not in HBNBCommand.classes:
+        if c_name not in Util.classes:
             print("** class doesn't exist **")
             return
 
@@ -181,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        if c_name not in HBNBCommand.classes:
+        if c_name not in Util.classes:
             print("** class doesn't exist **")
             return
 
@@ -208,10 +204,10 @@ class HBNBCommand(cmd.Cmd):
 
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
+            if args not in Util.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage.all(HBNBCommand.classes[args]).items():
+            for k, v in storage.all(Util.classes[args]).items():
                 print_list.append(str(v))
         else:
             for k, v in storage.all().items():
@@ -246,7 +242,7 @@ class HBNBCommand(cmd.Cmd):
         else:  # class name not present
             print("** class name missing **")
             return
-        if c_name not in HBNBCommand.classes:  # class name invalid
+        if c_name not in Util.classes:  # class name invalid
             print("** class doesn't exist **")
             return
 
