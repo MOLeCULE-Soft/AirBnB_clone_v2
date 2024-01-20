@@ -37,7 +37,7 @@ class DBStorage:
         Return:
             returns a dictionary of __object
         """
-        lst = cls if cls else [State, City, User, Place, Review, Amenity]
+        lst = [cls] if cls else [State, City, User, Place, Review, Amenity]
         return {f"{cls}.{el.id}": el for cls in lst
                 for el in self.__session.query(cls)}
 
