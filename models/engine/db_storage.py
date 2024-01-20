@@ -38,9 +38,9 @@ class DBStorage:
         Return:
             returns a dictionary of __object
         """
-        lst = [eval(cls)] if cls else [State, City, User, Place, Review, Amenity]
+        lst = [cls] if cls else Util.classes.keys()
         return {f"{cls}.{el.id}": el for cls in lst
-                for el in self.__session.query(cls)}
+                for el in self.__session.query(eval(cls))}
 
     def new(self, obj):
         """add a new element in the table
