@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Fabfile that generates a .tgz archive from the contents of
+# Fabfile to generates .tgz archive from the contents of
 # web_static directory
 import os.path
 from datetime import datetime
