@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Hello Flask"""
-from flask import Flask, escape
+from flask import Flask
+from werkzeug.utils import escape
 
 app = Flask(__name__)
 
