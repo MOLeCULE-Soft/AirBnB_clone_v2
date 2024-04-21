@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Hello Flask"""
-from flask import Flask, render_template, abort
+from flask import Flask, render_template
 from werkzeug.utils import escape
 
 app = Flask(__name__)
@@ -32,12 +32,9 @@ def number(n):
     return '{} is a number'.format(n)
 
 
-@app.route("/number_template/<n>", strict_slashes=False)
+@app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
-    data = n
-    if n.isdigit():
-        return render_template('5-number.html', n=n)
-    return abort(404)
+    return render_template('5-number.html', num=n)
 
 
 if __name__ == '__main__':
