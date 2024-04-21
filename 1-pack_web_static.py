@@ -4,7 +4,7 @@
 
 import os.path
 from datetime import datetime
-from fabric.api import local
+from fabric
 
 
 def do_pack():
@@ -17,3 +17,6 @@ def do_pack():
     if local(f"tar -cvzf {file} web_static").failed:
         return None
     return file
+
+if __name__ == "__main__":
+    do_pack()
